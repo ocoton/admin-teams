@@ -1,4 +1,7 @@
-function User() {
+const User = (props) => {
+  const { username, name, email, id } = props;
+
+
   const backendData = [
     { username: "ZiggyStardust", firstName: "David", lastName: "Bowie", email: "a@gmail", id: 1 },
     { username: "TheQueen", firstName: "Freddie", lastName: "Mercury", email: "b@gmail", id: 2 },
@@ -14,11 +17,13 @@ function User() {
   };
 
   return (
-    <div style={{ width: 400 }}>
+    <div>
       {backendData.map(ele => 
         <div style={noteRootStyle}>
-          <h3>{ele.username}</h3>
-          <p>id:{ele.id} - name:{ele.firstName} - surname:{ele.lastName}</p>
+          <h3> {ele.id} - {ele.username} - {ele.firstName} - {ele.lastName}</h3>
+          <button type="submit" href=""> 
+            Delete User
+          </button>
         </div>
       )}
     </div>
