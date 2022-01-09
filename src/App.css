@@ -43,3 +43,41 @@
   align-items: center;
   height: 100vh;
 }
+
+.section-top{
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: thin solid lightgray;
+}
+
+.list-card {
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  /* vertical-align: bottom; */
+  margin: 16px 0;
+}
+
+.card {
+  width: 50vw;
+}
+
+.list-card.button-align {
+  vertical-align: bottom;
+}
+
+Button {
+  margin: 8px;
+}
+
+.welcome-card {
+  width: 40vw;
+  /* opacity: 0.7;
+  background-color: white; */
+  /* background-color: {Colors.BLUE1}; */
+}
+
+/* .center {
+  margin: auto auto;
+} */

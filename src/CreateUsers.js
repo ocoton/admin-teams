@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// import { Button, Checkbox, Form } from 'semantic-ui-react'
-import { Button, FormGroup } from "@blueprintjs/core";
+import { Button, FormGroup, Label, InputGroup, H3 } from "@blueprintjs/core";
 import axios from 'axios';
 // import { useHistory } from 'react-router';
 import ReadUser from './ReadUser';
+
 
 
 
@@ -47,28 +47,29 @@ export default function CreateUsers() {
         <div>
             <div>
             </div>
-            
+            <H3> New User </H3>
+
             <form
             onSubmit={e => {
                 e.preventDefault();
             }}
             >
-                <label htmlFor="firstName">First Name</label>
-                <input id="firstName" placeholder='First Name' onChange={(e) => setFirstName(e.target.value)}/>
+                <Label htmlFor="firstName">First Name</Label>
+                <input class="bp3-input .modifier" id="firstName" placeholder='First Name' onChange={(e) => setFirstName(e.target.value)}/>
                 
-                <label htmlFor="lastName">Last Name</label>
-                <input id="lastName" placeholder='Last Name' onChange={(e) => setLastName(e.target.value)}/>
+                <Label htmlFor="lastName">Last Name</Label>
+                <input class="bp3-input .modifier" id="lastName" placeholder='Last Name' onChange={(e) => setLastName(e.target.value)}/>
                 
-                <label htmlFor="username">Username</label>
-                <input id="username" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
+                <Label htmlFor="username">Username</Label>
+                <input class="bp3-input .modifier" id="username" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
                 
-                <label htmlFor="email">email</label>
-                <input id="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
+                <Label htmlFor="email">Email Address</Label>
+                <input class="bp3-input .modifier" id="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
                 
-                <label htmlFor="phone">phone</label>
-                <input id="phone" placeholder='Phone' onChange={(e) => setPhone(e.target.value)}/>
+                <Label htmlFor="phone">Phone Number</Label>
+                <input class="bp3-input .modifier" id="phone" placeholder='Phone' onChange={(e) => setPhone(e.target.value)}/>
 
-                <button onClick={postData} type='submit'>Submit</button>
+                <Button onClick={postData} type='submit'>Submit</Button>
             </form>
         </div>
     )
