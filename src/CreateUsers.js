@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, FormGroup, Label, InputGroup, H3 } from "@blueprintjs/core";
 import axios from 'axios';
 // import { useHistory } from 'react-router';
-import ReadUser from './ReadUser';
 
 
 

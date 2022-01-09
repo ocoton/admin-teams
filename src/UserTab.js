@@ -4,9 +4,7 @@ import CreateUsers from './CreateUsers';
 import axios from 'axios';
 import { Button, Card, Colors } from "@blueprintjs/core";
 
-
-
-export default function ReadUser() {
+export function UserTab() {
     const [APIUserList, setAPIUserList] = useState([]);
    
     useEffect(() => {

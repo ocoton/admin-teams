@@ -1,49 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, FormGroup, Label, Checkbox, InputGroup, H3 } from "@blueprintjs/core";
-
 import axios from 'axios';
-// import { useHistory } from 'react-router';
-import ReadUser from './ReadUser';
-
-
 
 export default function CreateTeams() {
-    // let history = useHistory();
+    
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    // const [members, setMembers] = useState([]);
     
-    // const handleMemberSelect = (e) => {
-    //     let memberList = this.state.members;
-    //     let check = e.target.checked;
-    //     let checkedMember = e.target.value;
-    //     if(check){
-    //         this.setState({
-    //             members: [...this.state.members, checkedMember]
-    //         })
-    //     }else{ 
-    //         var index = memberList.indexOf(checkedMember);
-    //         if (index > -1) {
-    //             memberList.splice(index, 1);
-    //             this.setState({
-    //                 members: memberList
-    //             })
-    //         } 
-    //     }
-    // }
-
-    // const handleInputChangeDom = (e) => {
-    //     const newSet = new Set(this.state.members); // create a clone, don't update current state
-    //     if (e.target.checked) {
-    //        newSet.add(e.target.value);
-    //     } else {
-    //        newSet.delete(e.target.value);
-    //     }
-    //     this.setState({
-    //        members: newSet
-    //     });
-    //  }
-
     const onChange = (e) =>{
         console.log(e.target.checked);
         // console.log(this.members);

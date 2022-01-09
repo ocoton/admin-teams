@@ -1,31 +1,51 @@
 import * as React from "react";
-import { Alignment, Classes, H3, H5, InputGroup, Navbar, Switch, Tab, TabId, Tabs } from "@blueprintjs/core";
+import { BrowserRouter as Router,  Route, Link } from "react-router-dom";
+import { Alignment, Classes, H3, H5, InputGroup, Navbar, Switch, Tab, TabId, Tabs, Button, Icon, Callout } from "@blueprintjs/core";
+import { Example, handleBooleanChange, IExampleProps } from "@blueprintjs/docs-theme";
 import CreateUsers from './CreateUsers';
-import ReadUser from './ReadUser';
+import {UserTab} from './UserTab';
 import CreateTeams from './CreateTeams';
 import ReadTeams from './ReadTeams';
+import Welcome from './Welcome';
 
-export default function TabFrame () {
-    return (
-    <Tabs id="TabFrame" onChange={this.handleTabChange} selectedTabId="rx">
-        {/* <Tab id="ng" title="CreateUser" panel={<CreateUsers />} />
-        <Tab id="mb" title="Ember" panel={<CreateTeams />} panelClassName="ember-panel" /> */}
-        <Tab id="rx" title="React" panel={<ReadUser />} />
-        <Tab id="mb" title="React" panel={<ReadTeams />} />
 
-        {/* <Tab id="bb" disabled title="Backbone" panel={<BackbonePanel />} /> */}
-        <Tabs.Expander />
-        <input className="bp3-input" type="text" placeholder="Search..." />
-    </Tabs>
-        // <div class="bp3-tabs">
-        //     <ul class="bp3-tab-list .modifier" role="tablist">
-        //         <li class="bp3-tab" role="tab" aria-selected="true">Users</li>
-        //         <li class="bp3-tab" role="tab">Teams </li>
-        //         {/* <li class="bp3-tab" role="tab" aria-disabled="true">Disabled tab</li> */}
-        //     </ul>
-        //     <div class="bp3-tab-panel" role="tabpanel"> <ReadUser /></div>
-        //     <div class="bp3-tab-panel" role="tabpanel" aria-hidden="true"><ReadTeams /></div>
-        //     {/* <div class="bp3-tab-panel" role="tabpanel" aria-hidden="true">Disabled panel</div> */}
-        // </div>
-    )
+export class TabFrame extends React.PureComponent {
+    state = {
+        activePanelOnly: false,
+        animate: true,
+        navbarTabId: "Home",
+        vertical: true,
+    };
+
+    toggleActiveOnly = handleBooleanChange(activePanelOnly => this.setState({ activePanelOnly }));
+
+    toggleAnimate = handleBooleanChange(animate => this.setState({ animate }));
+
+    toggleVertical = handleBooleanChange(vertical => this.setState({ vertical }));
+
+    render() {
+        return (
+            <Example className="docs-tabs-example">
+                {/* uncontrolled mode & each Tab has a panel: */}
+                <Tabs
+                    animate={this.state.animate}
+                    id="TabsExample"
+                    key={this.state.vertical ? "vertical" : "horizontal"}
+                    renderActiveTabPanelOnly={this.state.activePanelOnly}
+                    vertical={this.state.vertical}
+                >
+                    <Tab id="mb" title="Home" panel={<Welcome />} panelClassName="welcome" />
+                    
+                    <Tab id="rx" panel={<UserTab />} > <Icon icon="person" /> Users</Tab>
+                    
+                    <Tab id="ng"  panel={<ReadTeams />} > <Icon icon="people" /> Teams</Tab>
+                    
+                    {/* <Tabs.Expander /> */}
+                    
+                </Tabs>
+            </Example>
+        );
+    }
+
+    handleNavbarTabChange = (navbarTabId: TabId) => this.setState({ navbarTabId });
 }

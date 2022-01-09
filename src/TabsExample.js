@@ -3,25 +3,25 @@ import { BrowserRouter as Router,  Route, Link } from "react-router-dom";
 import { Alignment, Classes, H3, H5, InputGroup, Navbar, Switch, Tab, TabId, Tabs, Button, Icon, Callout } from "@blueprintjs/core";
 import { Example, handleBooleanChange, IExampleProps } from "@blueprintjs/docs-theme";
 import CreateUsers from './CreateUsers';
-import ReadUser from './ReadUser';
+import {UserTab} from './UserTab';
 import CreateTeams from './CreateTeams';
 import ReadTeams from './ReadTeams';
 import Welcome from './Welcome';
 
-export interface ITabsExampleState {
-    activePanelOnly: boolean;
-    animate: boolean;
-    navbarTabId: TabId;
-    vertical: boolean;
-}
+// export interface ITabsExampleState {
+//     activePanelOnly: boolean;
+//     animate: boolean;
+//     navbarTabId: TabId;
+//     vertical: boolean;
+// }
 
-export class TabsExample extends React.PureComponent<IExampleProps, ITabsExampleState> {
-    state: ITabsExampleState = {
-        activePanelOnly: false,
-        animate: true,
-        navbarTabId: "Home",
-        vertical: true,
-    };
+// export class TabsExample extends React.PureComponent<IExampleProps, ITabsExampleState> {
+//     state: ITabsExampleState = {
+//         activePanelOnly: false,
+//         animate: true,
+//         navbarTabId: "Home",
+//         vertical: true,
+//     };
 
     toggleActiveOnly = handleBooleanChange(activePanelOnly => this.setState({ activePanelOnly }));
 
@@ -77,7 +77,7 @@ export class TabsExample extends React.PureComponent<IExampleProps, ITabsExample
                     <Tab id="mb" title="Home" panel={<Welcome />} panelClassName="welcome" />
                     {/* <Router>
                         <Link to="/list-users"> */}
-                            <Tab id="rx" panel={<ReadUser />} > <Icon icon="person" /> Users</Tab>
+                            <Tab id="rx" panel={<UserTab />} > <Icon icon="person" /> Users</Tab>
                         {/* </Link>
                         <Link to="/list-teams"> */}
                             <Tab id="ng"  panel={<ReadTeams />} > <Icon icon="people" /> Teams</Tab>
