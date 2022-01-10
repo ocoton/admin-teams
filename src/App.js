@@ -13,5 +13,4 @@ function App() {
   );
 }
 
-//change to non default
 export default App;

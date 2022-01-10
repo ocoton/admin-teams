@@ -1,8 +1,6 @@
 import React from 'react';
-import { Button, Card, Colors, Icon, Callout, H3 } from "@blueprintjs/core";
+import { Card, Icon, H3 } from "@blueprintjs/core";
 
-
-// const Welcome: React.FunctionComponent = () => (
 export function Welcome () {
     return (
         <div>
@@ -13,7 +11,7 @@ export function Welcome () {
                         <ul>
                             <li>Create and manage users</li>
                             <li>Create and manage teams</li>
-                            <li>Handle team permissions<Callout>coming soon</Callout></li>
+                            <li>Handle team permissions <strong>coming soon</strong></li>
                         </ul>
                 </div>
             </Card>

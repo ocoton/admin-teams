@@ -25,10 +25,8 @@ export function CreateTeams({ refreshTeams }) {
         .then(() => {
             refreshTeams()
         });
-        
     }
 
-    
     return (
         <div class="bp3-dialog-body">
             <H3> New Team </H3>

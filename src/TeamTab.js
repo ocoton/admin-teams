@@ -31,7 +31,6 @@ export function TeamTab({teamList, deleteTeam, deleteAllTeams, refreshTeams }) {
                                     <p> {data.description}</p>
                                 </div>
                                     <H4 style={{ color: Colors.BLUE1,}}>Members</H4>
-                                    {console.log(data.members)}
                                     {data.members.map((member) => {
                                         return (
                                             <p>User Id: {member}</p>

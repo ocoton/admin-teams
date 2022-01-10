@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { Button, FormGroup, Label, InputGroup, H3 } from "@blueprintjs/core";
 import axios from 'axios';
-// import { useHistory } from 'react-router';
 
-
-
-
-// export function CreateUsers({ refreshUsers, setUserListVisible }) {
 export function CreateUsers({ refreshUsers }) {
 
-    // let history = useHistory();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -25,7 +19,6 @@ export function CreateUsers({ refreshUsers }) {
             phone
         })
             .then(() => {
-                console.log('refreshing')
                 refreshUsers()
             });
     }
