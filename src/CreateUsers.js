@@ -6,7 +6,9 @@ import axios from 'axios';
 
 
 
-export default function CreateUsers() {
+// export function CreateUsers({ refreshUsers, setUserListVisible }) {
+export function CreateUsers({ refreshUsers }) {
+
     // let history = useHistory();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -22,54 +24,37 @@ export default function CreateUsers() {
             email,
             phone
         })
-        // .then(() => {
-        //     history.push( ReadUser )
-        // })
-        
-        // fetch('https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/users', {
-        // method: 'POST',
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json',
-        // },
-        // body: JSON.stringify({
-        //     firstName: firstName,
-        //     lastName: lastName,
-        //     username: username,
-        //     email: email
-        //     })
-        // })
+            .then(() => {
+                console.log('refreshing')
+                refreshUsers()
+            });
     }
 
-    
     return (
-        <div>
-            <div>
-            </div>
+        <div class="bp3-dialog-body">
             <H3> New User </H3>
-
-            <form
-            onSubmit={e => {
-                e.preventDefault();
-            }}
+            <FormGroup
+                onSubmit={e => {
+                    e.preventDefault();
+                }}
             >
                 <Label htmlFor="firstName">First Name</Label>
-                <input class="bp3-input .modifier" id="firstName" placeholder='First Name' onChange={(e) => setFirstName(e.target.value)}/>
-                
+                <input class="bp3-input .modifier" id="firstName" placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} />
+
                 <Label htmlFor="lastName">Last Name</Label>
-                <input class="bp3-input .modifier" id="lastName" placeholder='Last Name' onChange={(e) => setLastName(e.target.value)}/>
-                
+                <input class="bp3-input .modifier" id="lastName" placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} />
+
                 <Label htmlFor="username">Username</Label>
-                <input class="bp3-input .modifier" id="username" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
-                
+                <input class="bp3-input .modifier" id="username" placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
+
                 <Label htmlFor="email">Email Address</Label>
-                <input class="bp3-input .modifier" id="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
-                
+                <input class="bp3-input .modifier" id="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+
                 <Label htmlFor="phone">Phone Number</Label>
-                <input class="bp3-input .modifier" id="phone" placeholder='Phone' onChange={(e) => setPhone(e.target.value)}/>
+                <input class="bp3-input .modifier" id="phone" placeholder='Phone' onChange={(e) => setPhone(e.target.value)} />
 
                 <Button onClick={postData} type='submit'>Submit</Button>
-            </form>
+            </FormGroup>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { Button, Card, Colors, Icon, Callout, H3 } from "@blueprintjs/core";
 
 
 // const Welcome: React.FunctionComponent = () => (
-export default function Welcome () {
+export function Welcome () {
     return (
         <div>
             <Card>

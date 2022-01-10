@@ -1,51 +1,102 @@
-import * as React from "react";
-import { BrowserRouter as Router,  Route, Link } from "react-router-dom";
-import { Alignment, Classes, H3, H5, InputGroup, Navbar, Switch, Tab, TabId, Tabs, Button, Icon, Callout } from "@blueprintjs/core";
-import { Example, handleBooleanChange, IExampleProps } from "@blueprintjs/docs-theme";
-import CreateUsers from './CreateUsers';
-import {UserTab} from './UserTab';
-import CreateTeams from './CreateTeams';
-import ReadTeams from './ReadTeams';
-import Welcome from './Welcome';
+import { Tab, Tabs, Icon } from "@blueprintjs/core";
+import { Example } from "@blueprintjs/docs-theme";
+import { UserTab } from './UserTab';
+import { TeamTab }from './TeamTab';
+import { Welcome } from './Welcome';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
+export function TabFrame() {
+    
+    const [teams, setTeams] = useState([]);
+    const [users, setUsers] = useState([]);
+    
+    // Teams API functions
+    useEffect(() => {
+        axios.get(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/teams`)
+        .then((response) => {
+            setTeams(response.data);
+        })
+    }, [])
 
-export class TabFrame extends React.PureComponent {
-    state = {
+    const deleteTeam = (id) => {
+        axios.delete(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/teams/${id}`)
+        .then(() => {
+            refreshTeams();
+        })
+    }
+
+    const refreshTeams = () => {
+        
+        const getPromise = axios.get(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/teams`)
+        getPromise.then(response => setTeams(response.data))
+            
+    }
+
+    const deleteAllTeams = () => {
+        const deletePromises = teams.map((team) => { 
+            axios.delete(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/teams/${team.id}`)
+        })
+        Promise.all(deletePromises)
+        .then(() => {
+            refreshTeams()
+        })
+    }
+    
+    // Users API functions
+    useEffect(() => {
+        axios.get(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/users`)
+        .then((response) => {
+                setUsers(response.data);
+            })
+    }, [])
+
+    const deleteUser = (id) => {
+        axios.delete(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/users/${id}`)
+            .then(() => {
+                refreshUsers();
+            })
+    }
+    
+    const refreshUsers = () => {
+        
+        const getPromise = axios.get(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/users`)
+        getPromise.then(response => setUsers(response.data))
+            
+    }
+
+    const deleteAllUsers = () => {
+        const deletePromises = users.map((user) =>             
+            axios.delete(`https://61ca524e20ac1c0017ed902a.mockapi.io/api/v1/users/${user.id}`)
+        )        
+        Promise.all(deletePromises)        
+        .then(() => {
+            refreshUsers()                
+        })
+    }
+    
+    const [tabState, setTabState] = useState({
         activePanelOnly: false,
         animate: true,
         navbarTabId: "Home",
         vertical: true,
-    };
+    });
 
-    toggleActiveOnly = handleBooleanChange(activePanelOnly => this.setState({ activePanelOnly }));
+    return (
+        <Example className="docs-tabs-example">
+            <Tabs
+                animate={tabState.animate}
+                id="TabsExample"
+                key={tabState.vertical ? "vertical" : "horizontal"}
+                renderActiveTabPanelOnly={tabState.activePanelOnly}
+                vertical={tabState.vertical}
+            >
+                <Tab id="mb" title="Home" panel={<Welcome />} panelClassName="welcome" />
+                <Tab id="rx" panel={<UserTab userList={users} deleteUser={deleteUser} deleteAllUsers={deleteAllUsers} refreshUsers={refreshUsers}  />} > <Icon icon="person" /> Users</Tab>
+                <Tab id="ng" panel={<TeamTab userList={users} teamList={teams} deleteTeam={deleteTeam} deleteAllTeams={deleteAllTeams} refreshTeams={refreshTeams}/>} > <Icon icon="people" /> Teams</Tab>
+                <Tabs.Expander />
+            </Tabs>
+        </Example>
+    );
 
-    toggleAnimate = handleBooleanChange(animate => this.setState({ animate }));
-
-    toggleVertical = handleBooleanChange(vertical => this.setState({ vertical }));
-
-    render() {
-        return (
-            <Example className="docs-tabs-example">
-                {/* uncontrolled mode & each Tab has a panel: */}
-                <Tabs
-                    animate={this.state.animate}
-                    id="TabsExample"
-                    key={this.state.vertical ? "vertical" : "horizontal"}
-                    renderActiveTabPanelOnly={this.state.activePanelOnly}
-                    vertical={this.state.vertical}
-                >
-                    <Tab id="mb" title="Home" panel={<Welcome />} panelClassName="welcome" />
-                    
-                    <Tab id="rx" panel={<UserTab />} > <Icon icon="person" /> Users</Tab>
-                    
-                    <Tab id="ng"  panel={<ReadTeams />} > <Icon icon="people" /> Teams</Tab>
-                    
-                    {/* <Tabs.Expander /> */}
-                    
-                </Tabs>
-            </Example>
-        );
-    }
-
-    handleNavbarTabChange = (navbarTabId: TabId) => this.setState({ navbarTabId });
 }
